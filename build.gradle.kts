@@ -2,6 +2,7 @@ plugins {
     id("fabric-loom") version "0.7-SNAPSHOT"
     id ("maven-publish")
     kotlin("jvm") version "1.5.0"
+    kotlin("plugin.serialization") version "1.5.0"
 }
 
 val minecraftVersion: String by project
