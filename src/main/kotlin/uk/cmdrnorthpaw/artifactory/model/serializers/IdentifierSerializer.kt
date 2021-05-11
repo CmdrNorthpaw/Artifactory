@@ -23,3 +23,5 @@ object IdentifierSerializer : KSerializer<Identifier> {
 
     fun Identifier.serializer() = this@IdentifierSerializer
 }
+
+typealias Identifier = @Serializable(IdentifierSerializer::class) Identifier
