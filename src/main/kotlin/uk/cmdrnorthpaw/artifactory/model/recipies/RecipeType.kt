@@ -9,14 +9,14 @@ import uk.cmdrnorthpaw.artifactory.model.serializers.IdentifierSerializer
 value class RecipeType(val type: @Serializable(IdentifierSerializer::class) Identifier)
 
 @Serializable
-enum class RecipeTypes(val type: RecipeType) {
-    BLASTING(mcType("blasting")),
-    CAMPFIRE(mcType("campfire_cooking")),
-    FURNACE(mcType("smelting")),
-    SHAPED_CRAFTING(mcType("crafting_shaped")),
-    SHAPELESS_CRAFTING(mcType("crafting_shapeless")),
-    SMITHING(mcType("smithing")),
-    SMOKING(mcType("smoking")),
-    STONECUTTING(mcType("stonecutting"))
+object RecipeTypes {
+    val BLASTING = mcType("blasting")
+    val CAMPFIRE = mcType("campfire_cooking")
+    val FURNACE = mcType("smelting")
+    val SHAPED_CRAFTING = mcType("crafting_shaped")
+    val SHAPELESS_CRAFTING = mcType("crafting_shapeless")
+    val SMITHING = mcType("smithing")
+    val SMOKING = mcType("smoking")
+    val STONECUTTING = mcType("stonecutting")
 }
 private fun mcType(path: String) = RecipeType(Identifier("minecraft", path))
