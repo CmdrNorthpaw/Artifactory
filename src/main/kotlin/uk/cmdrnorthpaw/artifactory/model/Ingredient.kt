@@ -12,13 +12,13 @@ sealed class Ingredient {
     abstract val id: Identifier
 }
 
-@Serializable(with = IngredientSerializer.ItemSerializer::class)
+@Serializable
 class ItemIngredient(val item: Identifier) : Ingredient() {
     @Transient
     override val id: Identifier = item
 }
 
-@Serializable(with = IngredientSerializer.TagSerializer::class)
+@Serializable
 class TagIngredient(val tag: Identifier) : Ingredient() {
     override val id: Identifier
         get() = tag

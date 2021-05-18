@@ -18,21 +18,8 @@ import uk.cmdrnorthpaw.artifactory.model.TagIngredient
 import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 object IngredientSerializer : JsonContentPolymorphicSerializer<Ingredient>(Ingredient::class) {
-    object TagSerializer : KSerializer<TagIngredient> {
-        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("tag", PrimitiveKind.STRING)
-        override fun deserialize(decoder: Decoder) = TagIngredient(Identifier.tryParse(decoder.decodeString())!!)
-        override fun serialize(encoder: Encoder, value: TagIngredient) {
-            encoder.encodeString(value.tag.toString())
-        }
-    }
-
-    object ItemSerializer : KSerializer<ItemIngredient> {
-        override val descriptor = PrimitiveSerialDescriptor("item", PrimitiveKind.STRING)
-        override fun deserialize(decoder: Decoder) = ItemIngredient(Identifier.tryParse(decoder.decodeString())!!)
-        override fun serialize(encoder: Encoder, value: ItemIngredient) = encoder.encodeString(value.item.toString())
-    }
 
     override fun selectDeserializer(element: JsonElement): DeserializationStrategy<out Ingredient> {
-        return if (element.jsonObject.containsKey("item")) ItemSerializer else TagSerializer
+        return if (element.jsonObject.containsKey("item")) ItemIngredient.serializer() else TagIngredient.serializer()
     }
 }
